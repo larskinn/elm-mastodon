@@ -1,5 +1,6 @@
 module Entities.Relationship exposing (Relationship, decodeRelationship)
 
+import Internal.Decoding exposing (decodeId)
 import Json.Decode exposing (Decoder, bool, string)
 import Json.Decode.Pipeline exposing (decode, required)
 
@@ -22,7 +23,7 @@ type alias Relationship =
 decodeRelationship : Decoder Relationship
 decodeRelationship =
     decode Relationship
-        |> required "id" string
+        |> required "id" decodeId
         |> required "following" bool
         |> required "followed_by" bool
         |> required "blocking" bool

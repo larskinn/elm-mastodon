@@ -1,5 +1,6 @@
 module Entities.Attachment exposing (Attachment, decodeAttachment)
 
+import Internal.Decoding exposing (decodeId)
 import Json.Decode as Decode exposing (Decoder, float, int, nullable, string)
 import Json.Decode.Pipeline exposing (decode, required)
 
@@ -19,7 +20,7 @@ type alias Attachment =
 decodeAttachment : Decoder Attachment
 decodeAttachment =
     decode Attachment
-        |> required "id" string
+        |> required "id" decodeId
         |> required "type" decodeAttachmentType
         |> required "url" string
         |> required "remote_url" (nullable string)

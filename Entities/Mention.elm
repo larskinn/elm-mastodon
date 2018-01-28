@@ -1,5 +1,6 @@
 module Entities.Mention exposing (Mention, decodeMention)
 
+import Internal.Decoding exposing (decodeId)
 import Json.Decode exposing (Decoder, string)
 import Json.Decode.Pipeline exposing (decode, required)
 
@@ -18,4 +19,4 @@ decodeMention =
         |> required "url" string
         |> required "username" string
         |> required "acct" string
-        |> required "id" string
+        |> required "id" decodeId

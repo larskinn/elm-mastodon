@@ -1,6 +1,7 @@
 module Entities.Account exposing (Account, AccountWithSource, decodeAccount, decodeAccountWithSource)
 
 import Date exposing (Date)
+import Internal.Decoding exposing (decodeId)
 import Json.Decode as Decode exposing (Decoder, bool, int, nullable, string)
 import Json.Decode.Extra exposing (date)
 import Json.Decode.Pipeline exposing (decode, optional, required)
@@ -29,7 +30,7 @@ type alias Account =
 decodeAccount : Decoder Account
 decodeAccount =
     decode Account
-        |> required "id" string
+        |> required "id" decodeId
         |> required "username" string
         |> required "acct" string
         |> required "display_name" string
