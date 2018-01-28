@@ -1,9 +1,8 @@
 module Entities.AttachmentTests exposing (..)
 
 import Entities.Attachment exposing (Attachment, decodeAttachment)
-import Expect
-import Json.Decode exposing (decodeString)
 import Test exposing (Test, describe, test)
+import TestUtils.ExpectDecoder as ExpectDecoder
 
 
 suite : Test
@@ -12,12 +11,7 @@ suite =
         [ describe "decodeAttachment"
             [ test "should succeed on valid attachment JSON" <|
                 \_ ->
-                    case decodeString decodeAttachment attachmentExample of
-                        Ok _ ->
-                            Expect.pass
-
-                        Err err ->
-                            Expect.fail err
+                    ExpectDecoder.toSucceed decodeAttachment attachmentExample
             ]
         ]
 

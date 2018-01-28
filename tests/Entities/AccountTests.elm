@@ -1,9 +1,8 @@
 module Entities.AccountTests exposing (..)
 
 import Entities.Account exposing (AccountWithSource, decodeAccountWithSource)
-import Expect
-import Json.Decode exposing (decodeString)
 import Test exposing (Test, describe, test)
+import TestUtils.ExpectDecoder as ExpectDecoder
 
 
 suite : Test
@@ -12,12 +11,7 @@ suite =
         [ describe "decodeAccountWithSource"
             [ test "should succeed on a valid response from /api/v1/accounts/verify_credentials" <|
                 \_ ->
-                    case decodeString decodeAccountWithSource accountWithSourceField of
-                        Ok _ ->
-                            Expect.pass
-
-                        Err err ->
-                            Expect.fail err
+                    ExpectDecoder.toSucceed decodeAccountWithSource accountWithSourceField
             ]
         ]
 
