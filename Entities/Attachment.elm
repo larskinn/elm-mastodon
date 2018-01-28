@@ -5,7 +5,7 @@ import Json.Decode.Pipeline exposing (decode, required)
 
 
 type alias Attachment =
-    { id : Int
+    { id : String
     , attachmentType : AttachmentType
     , url : String
     , remoteUrl : Maybe String
@@ -19,7 +19,7 @@ type alias Attachment =
 decodeAttachment : Decoder Attachment
 decodeAttachment =
     decode Attachment
-        |> required "id" int
+        |> required "id" string
         |> required "type" decodeAttachmentType
         |> required "url" string
         |> required "remote_url" (nullable string)
@@ -42,16 +42,16 @@ decodeAttachmentType =
         |> Decode.andThen
             (\string ->
                 case string of
-                    "ImageAttachment" ->
+                    "image" ->
                         Decode.succeed ImageAttachment
 
-                    "VideoAttachment" ->
+                    "video" ->
                         Decode.succeed VideoAttachment
 
-                    "GifvAttachment" ->
+                    "gifv" ->
                         Decode.succeed GifvAttachment
 
-                    "UnknownAttachment" ->
+                    "unknown" ->
                         Decode.succeed UnknownAttachment
 
                     _ ->
