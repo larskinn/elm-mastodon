@@ -1,6 +1,7 @@
 module Entities.Account exposing (Account, AccountWithSource, decodeAccount, decodeAccountWithSource)
 
 import Date exposing (Date)
+import Entities.Visibility exposing (Visibility, decodeVisibility)
 import Internal.Decoding exposing (decodeId)
 import Json.Decode as Decode exposing (Decoder, bool, int, nullable, string)
 import Json.Decode.Extra exposing (date)
@@ -48,38 +49,8 @@ decodeAccount =
         |> optional "moved" (nullable string) Nothing
 
 
-type Privacy
-    = Public
-    | Unlisted
-    | Private
-    | Direct
-
-
-decodePrivacy : Decoder Privacy
-decodePrivacy =
-    string
-        |> Decode.andThen
-            (\string ->
-                case string of
-                    "public" ->
-                        Decode.succeed Public
-
-                    "unlisted" ->
-                        Decode.succeed Unlisted
-
-                    "private" ->
-                        Decode.succeed Private
-
-                    "direct" ->
-                        Decode.succeed Direct
-
-                    _ ->
-                        Decode.fail "Invalid Privacy"
-            )
-
-
 type alias Source =
-    { privacy : Privacy
+    { privacy : Visibility
     , sensitive : Bool
     , note : String
     }
@@ -88,7 +59,7 @@ type alias Source =
 decodeSource : Decoder Source
 decodeSource =
     decode Source
-        |> required "privacy" decodePrivacy
+        |> required "privacy" decodeVisibility
         |> required "sensitive" bool
         |> required "note" string
 
