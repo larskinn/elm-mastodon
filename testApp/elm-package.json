@@ -1,9 +1,10 @@
 {
     "version": "1.0.0",
-    "summary": "Mastodon API library for Elm",
+    "summary": "Application for testing usage of the API",
     "repository": "https://github.com/larskinn/elm-mastodon.git",
     "license": "BSD3",
     "source-directories": [
+        "..",
         "."
     ],
     "exposed-modules": [],
@@ -11,7 +12,9 @@
         "NoRedInk/elm-decode-pipeline": "3.0.0 <= v < 4.0.0",
         "elm-community/json-extra": "2.6.0 <= v < 3.0.0",
         "elm-lang/core": "5.1.1 <= v < 6.0.0",
-        "elm-lang/http": "1.0.0 <= v < 2.0.0"
+        "elm-lang/html": "2.0.0 <= v < 3.0.0",
+        "elm-lang/http": "1.0.0 <= v < 2.0.0",
+        "krisajenkins/remotedata": "4.3.3 <= v < 5.0.0"
     },
     "elm-version": "0.18.0 <= v < 0.19.0"
 }
